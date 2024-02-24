@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>画图小程序</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      canvas {
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .toolbar button {
+        margin: 0 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .toolbar button:hover {
+        background-color: #45a049;
+      }
+
+      .toolbar button.disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button id="pencil">画笔</button>
+      <button id="line">直线</button>
+      <button id="rectangle">矩形</button>
+      <button id="circle">圆形</button>
+      <button id="clear">清空</button>
+    </div>
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      function startDrawing(e) {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      }
+
+      function stopDrawing() {
+        isDrawing = false;
+      }
+
+      function drawLine(e) {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
+
+      function drawRectangle(e) {
+        const width = e.offsetX - lastX;
+        const height = e.offsetY - lastY;
+        ctx.fillRect(lastX, lastY, width, height);
+      }
+
+      function drawCircle(e) {
+        const radius = Math.sqrt(
+          Math.pow(e.offsetX - lastX, 2) + Math.pow(e.offsetY - lastY, 2)
+        );
+        ctx.beginPath();
+        ctx.arc(lastX, lastY, radius, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      canvas.addEventListener("mousedown", startDrawing);
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mouseup", stopDrawing);
+      canvas.addEventListener("mouseout", stopDrawing);
+
+      const pencilBtn = document.getElementById("pencil");
+      const lineBtn = document.getElementById("line");
+      const rectangleBtn = document.getElementById("rectangle");
+      const circleBtn = document.getElementById("circle");
+      const clearBtn = document.getElementById("clear");
+
+      pencilBtn.addEventListener("click", () => {
+        canvas.removeEventListener("mousedown", drawLine);
+        canvas.removeEventListener("mousedown", drawRectangle);
+        canvas.removeEventListener("mousedown", drawCircle);
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+      });
+
+      lineBtn.addEventListener("click", () => {
+        canvas.removeEventListener("mousedown", startDrawing);
+        canvas.removeEventListener("mousemove", draw);
+        canvas.removeEventListener("mousedown", drawRectangle);
+        canvas.removeEventListener("mousedown", drawCircle);
+        canvas.addEventListener("mousedown", drawLine);
+      });
+
+      rectangleBtn.addEventListener("click", () => {
+        canvas.removeEventListener("mousedown", startDrawing);
+        canvas.removeEventListener("mousemove", draw);
+        canvas.removeEventListener("mousedown", drawLine);
+        canvas.removeEventListener("mousedown", drawCircle);
+        canvas.addEventListener("mousedown", drawRectangle);
+      });
+
+      circleBtn.addEventListener("click", () => {
+        canvas.removeEventListener("mousedown", startDrawing);
+        canvas.removeEventListener("mousemove", draw);
+        canvas.removeEventListener("mousedown", drawLine);
+        canvas.removeEventListener("mousedown", drawRectangle);
+        canvas.addEventListener("mousedown", drawCircle);
+      });
+
+      clearBtn.addEventListener("click", clearCanvas);
+    </script>
+  </body>
+</html>

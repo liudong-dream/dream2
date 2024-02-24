@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>每日一句</title>
+    <style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh; /* 视口高度 */
+         background-color: #f5f5f5; /* 背景颜色 */
+         margin: 0; /* 移除默认边距 */
+      }
+
+      #quote-container {
+         text-align: center;
+         max-width: 600px;
+         padding: 40px;
+         background-color:#ffffff; /* 容器背景颜色 */
+         box-shadow:-10px 10px 20px rgba(0,0,0,.1); /* 盒子阴影效果增添立体感和深度 */
+         border-radius:15px;/* 圆角边框 */
+      }
+
+      h1 {
+        color:#007BFF;/* 标题颜色 */
+        margin-bottom :30px;/* 增加标题与名言之间的间距 */
+      }
+
+      p#quote {
+        font-size :22x ;/* 字体大小调整*/
+        color:#333333 ;/* 字体颜色调整*/
+        line-height :1.6 ;/* 行间距调整*/
+       }
+
+       button{
+           margin-top :20 px ;
+           padding :12 px   ;
+           font-size :16 px ;
+           color:white ;
+           background-color ：#007 BFF；
+            border:none；
+            cursor:pointer；
+             transition：background-color .3 s ease-in-out；
+              border-radius：25 px；
+               outline:none；
+                }
+
+                 button:hover{
+                   background-color：＃0056b3；
+                    }
+    </style>
+  </head>
+  <body>
+    <div id="quote-container">
+      <h1>今日灵感</h1>
+      <p id="quote">加载中...</p>
+      <!-- 新增按钮以便用户点击刷新新的名言-->
+      <!-- 注意这里添加了onClick事件处理函数nextQuote() -->
+      <button onClick="nextQuote()">换一条</button>
+    </div>
+
+    <script type="text/javascript">
+      const quotes = [
+        "行动是治愈恐惧的良药。",
+        // 添加更多语录...
+        "勇敢不是不感到害怕，而是你会和恐惧并肩作战。",
+        "不论你在何处，请记得：你都有能力改变周遭的世界。",
+        "行动是治愈恐惧的良药。",
+        "唯有行动才能带来改变。",
+        "成功不是终点，失败也非终结，只有勇气才是永恒。",
+        "改变自己，是自救；影响他人，是救人。",
+        "坚持意味着胜利，坚持让我们与众不同。",
+        "智者一切求自己，愚者一切求他人。",
+        "不要等待机会，而要创造机会。",
+        "一个能从别人的角度思考问题的人, 会更加乐于助人, 更富同情心.",
+        "真正的强者，并非看起来无所不能，而是在跌倒时总能再爬起来。",
+        "过去属于死神，未来属于你自己。",
+        "目标不是都设定用来达成的，在很多时候它们仅仅是用来给你一个正确方向",
+        "把握现在吧！昨天已逝去，并且明天可能永远不会到来。",
+        "勇敢是一次性面对恐惧；胆怯是每日心存恐惧。",
+        "成功之路不是走向荣耀的阶梯，而无法用脚趾触及。",
+        "只有那些愿意承担风险去失败的人，才会实现大成就。",
+        "悲观者看到困难于每个机会；乐观者在每个困难中看见机会。",
+        "你必须期待自己成功，方能真正成功。",
+        "改变你的思考方式，你就改变了自己的世界。",
+        "积极思维带来积极生活。",
+        "坚持并非总是容易，但总是值得的。",
+        "没有伟大的努力，便没有伟大的胜利。",
+        "最有效率地做到这两件事：今日所需做、明日所希望达成。",
+        "把握现在吧！昨天已逝去，并且明天可能永远不会到来。",
+        "勇敢是一次性面对恐惧；胆怯是每日心存恐惧。",
+        "成功之路不是走向荣耀的阶梯，而无法用脚趾触及。",
+        "只有那些愿意承担风险去失败的人，才会实现大成就。",
+        "悲观者看到困难于每个机会；乐观者在每个困难中看见机会。",
+        "你必须期待自己成功，方能真正成功。",
+        "改变你的思考方式，你就改变了自己的世界。",
+      ];
+
+      let currentIndex = -1;
+
+      function nextQuote() {
+        currentIndex = (currentIndex + 1) % quotes.length;
+        document.getElementById("quote").innerText = quotes[currentIndex];
+      }
+
+      window.onload = function () {
+        nextQuote(); // 页面加载时显示第一条
+      };
+    </script>
+  </body>
+</html>

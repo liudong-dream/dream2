@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
+        background-image: url(OIP-C.jpg);
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+      }
+
+      .display {
+        grid-column: 1 / -1;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        height: 50px;
+        padding: 10px;
+        font-size: 24px;
+        text-align: right;
+      }
+
+      .button {
+        background-color: #e0e0e0;
+        border: none;
+        padding: 15px;
+        font-size: 18px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #d3d3d3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="display" id="display">0</div>
+      <div class="calculator">
+        <button class="button" onclick="input('7')">7</button>
+        <button class="button" onclick="input('8')">8</button>
+        <button class="button" onclick="input('9')">9</button>
+        <button class="button" onclick="input('/')">/</button>
+        <button class="button" onclick="input('4')">4</button>
+        <button class="button" onclick="input('5')">5</button>
+        <button class="button" onclick="input('6')">6</button>
+        <button class="button" onclick="input('*')">*</button>
+        <button class="button" onclick="input('1')">1</button>
+        <button class="button" onclick="input('2')">2</button>
+        <button class="button" onclick="input('3')">3</button>
+        <button class="button" onclick="input('-')">-</button>
+        <button class="button" onclick="input('0')">0</button>
+        <button class="button" onclick="input('.')">.</button>
+        <button class="button" onclick="calculate()">=</button>
+        <button class="button" onclick="input('+')">+</button>
+        <button class="button" onclick="clear()">C</button>
+      </div>
+    </div>
+
+    <script>
+      function input(value) {
+        var display = document.getElementById("display");
+        display.innerHTML += value;
+      }
+
+      function calculate() {
+        var display = document.getElementById("display");
+        display.innerHTML = eval(display.innerHTML);
+      }
+
+      function clear() {
+        var display = document.getElementById("display");
+        display.innerHTML = "0";
+      }
+    </script>
+  </body>
+</html>

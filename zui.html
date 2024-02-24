@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>提问小程序</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      #container {
+        margin: 50px auto;
+        max-width: 400px; /* 设置最大宽度以限制容器大小 */
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      #container {
+        margin: 50px auto;
+        width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      #question {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      #options {
+        margin-bottom: 10px;
+      }
+
+      .option {
+        padding: 5px;
+        background-color: #f9f9f9;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      .option:hover {
+        background-color: #eee;
+      }
+
+      #output {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        min-height: 100px;
+      }
+
+      #button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      #button:hover {
+        background-color: #23527c;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>提问小程序</h1>
+      <h2>（看看你能答对多少道）</h2>
+      <div id="question"></div>
+      <div id="options"></div>
+      <button id="button">提交</button>
+      <div id="output"></div>
+    </div>
+
+    <script>
+      // JavaScript代码
+      var button = document.getElementById("button");
+      var questionDiv = document.getElementById("question");
+      var optionsDiv = document.getElementById("options");
+      var output = document.getElementById("output");
+
+      var questions = [
+        {
+          question: "中国最高的山是哪座？",
+          options: ["珠穆朗玛峰", "泰山", "峨眉山"],
+          answer: 1,
+        },
+        {
+          question: "貂蝉是哪个朝代的人物？",
+          options: ["唐朝", "宋朝", "三国时期"],
+          answer: 2,
+        },
+        {
+          question: "以下哪个是我国四大名著之一？",
+          options: ["红楼梦", "水浒传", "西游记"],
+          answer: 0,
+        },
+        {
+          question: "中国古代丝绸之路的起点是哪个城市？",
+          options: ["敦煌", "长安", "洛阳"],
+          answer: 1,
+        },
+        {
+          question: "我们的世界是第几代主机？",
+          options: ["第四代", "第五代", "第六代"],
+          answer: 1,
+        },
+        {
+          question: "下列哪个编程语言属于面向对象语言？",
+          options: ["C", "Python", "Assembly"],
+          answer: 1,
+        },
+        {
+          question: "世界上最大的洲是哪个？",
+          options: ["亚洲", "非洲", "南美洲"],
+          answer: 0,
+        },
+        {
+          question: "以下哪个是美国的首都？",
+          options: ["华盛顿特区", "纽约", "洛杉矶"],
+          answer: 0,
+        },
+        {
+          question: "以下哪个国家以可可豆和巧克力闻名？",
+          options: ["巴西", "法国", "瑞士"],
+          answer: 2,
+        },
+        {
+          question: "歌剧《图兰朵》的作曲家是谁？",
+          options: ["普契尼", "莫扎特", "贝多芬"],
+          answer: 0,
+        },
+        {
+          question: "以下哪个国家拥有最多的奥斯卡金像奖？",
+          options: ["美国", "法国", "英国"],
+          answer: 0,
+        },
+        {
+          question: "以下哪个国家以目前拥有最多的世界遗产闻名？",
+          options: ["中国", "法国", "意大利"],
+          answer: 0,
+        },
+        {
+          question: "C语言中，下面哪个选项是合法的标识符？",
+          options: ["1abc", "abc123", "&def"],
+          answer: 1,
+        },
+        {
+          question: "平方根的数学符号是什么？",
+          options: ["∑", "√", "π"],
+          answer: 1,
+        },
+        {
+          question: "以下哪个计算机操作系统是闭源的？",
+          options: ["Windows", "Linux", "MacOS"],
+          answer: 0,
+        },
+        {
+          question: "著名画作《蒙娜丽莎》的作者是谁？",
+          options: ["达·芬奇", "梵高", "毕加索"],
+          answer: 0,
+        },
+        {
+          question: "下列哪个不属于五大洲？",
+          options: ["南极洲", "欧洲", "南美洲"],
+          answer: 0,
+        },
+        {
+          question: "中国古代四大美女中，不包括谁？",
+          options: ["杨贵妃", "西施", "貂蝉"],
+          answer: 2,
+        },
+        {
+          question: "以下哪个国家使用欧元作为它的货币？",
+          options: ["法国", "德国", "意大利"],
+          answer: 2,
+        },
+        {
+          question: "世界上最长的河流是哪个？",
+          options: ["尼罗河", "亚马逊河", "长江"],
+          answer: 0,
+        },
+        // 添加更多问题
+      ];
+
+      function generateQuestion() {
+        // 随机选择一个问题
+        var randomQuestion =
+          questions[Math.floor(Math.random() * questions.length)];
+
+        // 显示问题
+        questionDiv.innerHTML = randomQuestion.question;
+
+        // 显示选项
+        optionsDiv.innerHTML = "";
+        randomQuestion.options.forEach(function (option, index) {
+          var optionDiv = document.createElement("div");
+          optionDiv.classList.add("option");
+          optionDiv.innerHTML = option;
+          optionDiv.setAttribute("data-index", index);
+          optionsDiv.appendChild(optionDiv);
+        });
+      }
+
+      // 提交答案
+      function submitAnswer(answerIndex) {
+        var currentQuestion =
+          questions[Math.floor(Math.random() * questions.length)];
+
+        // 检查答案是否正确
+        if (answerIndex === currentQuestion.answer) {
+          output.innerHTML = "回答正确！";
+        } else {
+          output.innerHTML = "回答错误！";
+        }
+
+        // 生成下一题
+        generateQuestion();
+      }
+
+      // 生成第一题
+      generateQuestion();
+
+      button.addEventListener("click", function () {
+        // 获取选中的选项
+        var selectedOption = document.querySelector(".option.selected");
+
+        if (selectedOption) {
+          // 提交答案
+          submitAnswer(parseInt(selectedOption.getAttribute("data-index")));
+        } else {
+          output.innerHTML = "请选择一个选项。";
+        }
+      });
+
+      optionsDiv.addEventListener("click", function (e) {
+        // 移除之前选中的选项样式
+        var selectedOption = document.querySelector(".option.selected");
+        if (selectedOption) {
+          selectedOption.classList.remove("selected");
+        }
+
+        // 添加当前选项的选中样式
+        if (e.target.classList.contains("option")) {
+          e.target.classList.add("selected");
+        }
+      });
+    </script>
+  </body>
+</html>

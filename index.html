@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>liudong的个人网站</title>
+    <style>
+      #clock {
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      .container {
+        background-image: url("background.jpg");
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .menu-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .menu-icon {
+        cursor: pointer;
+        font-size: 30px;
+        color: white;
+      }
+
+      .advanced-menu {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        max-height: 0;
+        transition: max-height 0.5s ease-out;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .advanced-menu.show {
+        max-height: 100vh;
+      }
+
+      .advanced-menu li {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .advanced-menu li:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      a {
+        font-size: 18px;
+        color: white;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: yellow;
+      }
+
+      a:active {
+        color: green;
+      }
+      body {
+        background-image: url(2.jpg);
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      /* 高级菜单样式 */
+      .menu-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .menu-icon {
+        cursor: pointer;
+        font-size: 30px;
+        color: white;
+      }
+
+      .advanced-menu {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        max-height: 0;
+        transition: max-height 0.5s ease-out;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .advanced-menu.show {
+        max-height: 100vh; /* 调整为合适的最大高度 */
+      }
+
+      .advanced-menu li {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .advanced-menu li:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      a {
+        font-size: 18px;
+        color: white;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: yellow;
+      }
+
+      a:active {
+        color: green;
+      }
+
+      #clock {
+        font-size: 40px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: sans-serif;
+      }
+      #clock-digit {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 40px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: sans-serif;
+      }
+
+      #clock-digit span {
+        margin-right: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="menu-icon">&#9776;</div>
+      <ul class="advanced-menu">
+        <li>
+          <a href="https://github.com/liudong-dream/dream1"><h2>GitHub</h2> </a>
+        </li>
+        <li>
+          <a href="huanjing.html"><h2>编程环境配置</h2> </a>
+        </li>
+        <li>
+          <a href="geren.html"><h2>个人介绍</h2> </a>
+        </li>
+
+        <li>
+          <a href="wen.html"><h2>文章</h2></a>
+        </li>
+
+        <li>
+          <a href="#"><h2>功能小程序</h2> </a>
+          <ul class="sub-menu">
+            <li><a href="jisuan.html">计算器</a></li>
+            <li><a href="zui.html">提问小程序</a></li>
+            <li><a href="hua.html">画图小程序</a></li>
+            <li><a href="xiaohua.html">随机生成笑话小程序</a></li>
+            <!-- 可以添加更多子菜单项 -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div id="clock"></div>
+    </div>
+    <script>
+      const menu = document.querySelector(".advanced-menu");
+      const menuIcon = document.querySelector(".menu-icon");
+
+      // 点击小图标展示/隐藏菜单
+      menuIcon.addEventListener("click", function () {
+        menu.classList.toggle("show");
+      });
+
+      // 阻止点击菜单内的链接时关闭菜单
+      menu.addEventListener("click", function (event) {
+        if (!event.target.matches("a")) {
+          menu.classList.remove("show");
+        }
+      });
+
+      function updateClock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var time = hours + ":" + minutes + ":" + seconds;
+        document.getElementById("clock").innerHTML = time;
+      }
+      setInterval(updateClock, 1000);
+    </script>
+  </body>
+</html>

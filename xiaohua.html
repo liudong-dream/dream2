@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>随机生成笑话</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url(77.jpg);
+        background-size: cover;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .joke-container {
+        margin: 30px auto;
+        width: 80%;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .joke-text {
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .joke-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .joke-button:hover {
+        background-color: #23527c;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>随机生成笑话</h1>
+    <div class="joke-container">
+      <p class="joke-text" id="joke"></p>
+      <button class="joke-button" onclick="generateJoke()">生成笑话</button>
+    </div>
+
+    <script>
+      const jokes = [
+        "今天是个好日子，你猜我为什么这么高兴？因为我才知道，肥仔旺的盒饭已经满50减5啦！",
+        "为什么猪能上树？因为它会鲨鱼功。",
+        "一个人走进一间餐厅，问服务员：“这儿有没有电视啊？”服务员回答：“有的，但是音量调得很小。”",
+        "小明：妈妈，我可以上天吗？妈妈：上天不容易，你去找个梯子吧。",
+        "为什么蚂蚁永远不生病？因为有医保。",
+        "小明把一块糖放到地上，然后大声喊道：“谁敢动我糖，我就打爆他头！” 没过1分钟，糖就不见了。小明冲出门去追着一个小朋友喊： “你知道我是谁吗？我是糖霸！”",
+        "老师问小明为什么买一个苹果要10块钱？小明回答：因为市场供应紧张，产量低，需求大，所以价格高。",
+        "一个人在公园里看到一个在划船，他向划船的人大声喊去：“摄影你就摄像呗！",
+        "大象问兔子：“你高兴时能翻跟头吗？”兔子说：“能！”大象高兴地说：“那麻烦你翻个跟头给我看看。”兔子想了想说：“你把耳朵捆在后背上让我试试。”",
+        "小明每晚都会去给妈妈放风筝，妈妈问他为什么喜欢放风筝，小明说：因为我可以追风。妈妈看着半天，突然摇摇头说：哎呀，你妈妈40岁了，不再是追风的年纪了。",
+        "小明考试不及格，被老师批评：“小明啊，你看看人家李华，成绩多好！他在空中一扔两个苹果，一个是红的，一个是绿的，掉下来时他把绿的接住了。” 小明皱眉道：“那他红的捡到哪儿去了？”",
+        "小朋友对爸爸说：“爸爸，你说女孩子跳广场舞好看，但我看到的都是中年妇女。” 爸爸把小朋友抱在怀中说：“宝贝，她们曾经是女孩子。”",
+        "“我家的小鹿哪里都不怕，只会被敲两下就奔跑！”小妹对小叔子自夸。小叔子回答：“所以你不是我们家的小鹿。”",
+        "小明问爸爸：「为什么早上的太阳是红的，中午的太阳是黄的，晚上的太阳是白的呢？」 爸爸说：「是因为早上太阳刚起，脸红，中午太阳在高空运动，变黄了；晚上太阳累了，脸洗干净了，所以白。」",
+        "两只熊在森林里面遇到一只玛莎拉蒂，她们都被吓到了，其中一只熊追了上去，一只熊说：刚才怎么回事？你为什么没有跑过去？另一只熊抓了抓脑袋说：对不起，我不认识她，不过我还记得车牌号码：川A88888。",
+        "妈妈：“你终于肯回来了。”女儿：“玩的开心吗？”妈妈：“你跟你爸妈打电话的时候应该有录音吧？”女儿：“没有啊。”妈妈：“刚才白天接你爸妈电话的时候是不是匿名来电啊？”女儿：“是。”妈妈：“那时候有没有要人质或者我被胁迫了啊。”女儿：“没有。”妈妈：“那就没事了。”",
+        "小强: 我的头发长得好快，一到凌晨它就会一点一点进入我的脑袋。同桌: 真的假的?这么神奇!小强: 是的，而且到了白天头发就会一点一点长出来。同桌: ...",
+        "小杰把气球放进冰箱，规矩了到底会发生什么事情?这一下爸妈可知道什么是把气球装进冰箱！小杰也找到练习记忆的法宝了。还有聪明的你机会画外音。",
+        "两个蘑菇住在黑森林，有一天，他们看到一台巨大的送外卖的车。其中一个蘑菇喊道：“看哪，我门的出租车来了！”",
+      ];
+
+      function generateJoke() {
+        const jokeText = document.getElementById("joke");
+        const randomIndex = Math.floor(Math.random() * jokes.length);
+        jokeText.textContent = jokes[randomIndex];
+      }
+    </script>
+  </body>
+</html>
